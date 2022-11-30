@@ -3,6 +3,7 @@ package Obj.Lobby;
 import Obj.Person.Saver;
 import Obj.Person.Victim;
 import Obj.Place.*;
+import Obj.Story.Story;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +14,15 @@ public class Lobby {
 
     List<Victim> victims = new ArrayList<>();
 
+    Story story;
+
     private FarAway farAway;
     private Field field;
     private Zabor zabor;
     private Crater crater;
 
-    public Lobby() {
-
+    public Lobby(Story story) {
+        this.story = story;
     }
 
     public void setLocations(FarAway farAway, Field field, Zabor zabor, Crater crater) {
@@ -46,12 +49,6 @@ public class Lobby {
 
     private void checkVictims() {
         for (Victim v : victims) {
-            if (v.getPlace().equals(farAway)) {
-                System.out.println(v.getSaver().getName() + " спас " + v.getName());
-                v.setRescue(true);
-                v.getSaver().setAimToVictim(false);
-                v.getSaver().delVictim();
-            }
             if (v.isRescue()) {
                 victims.remove(v);
                 break;
@@ -90,17 +87,23 @@ public class Lobby {
                         }
                     }
 
-                } else if (s.getPlace().getNextPlace() != null) {
-                    if (s.getPlace().action(s)) {
-                        break;
+                } else if (s.getPlace() != null) {
+                    if (s.getPlace().action(s)) {break;}
+                    if (s.getPlace().getNextPlace() != null) {
+                        s.goTo(s.getPlace().getNextPlace());
                     }
-                    s.goTo(s.getPlace().getNextPlace());
                 }
             } else {
-                if (s.getPlace().getPrevPlace() != null) {
-                    s.goTo(s.getPlace().getPrevPlace());
+                if (s.getPlace() != null) {
+                    if (s.getPlace().action(s)) {break;}
+                    if (s.getPlace().getPrevPlace() != null) {
+                        s.goTo(s.getPlace().getPrevPlace());
+                    }
                 }
             }
+        }
+        if (this.savers.size() == 0) {
+            this.story.setRunning(false);
         }
     }
 

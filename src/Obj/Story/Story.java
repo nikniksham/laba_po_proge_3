@@ -1,3 +1,5 @@
+package Obj.Story;
+
 import Obj.Grav;
 import Obj.Lobby.Lobby;
 import Obj.Person.Victim;
@@ -21,7 +23,9 @@ public class Story {
     FarAway farAway = new FarAway("даль", Grav.NO);
 
     // Лобби
-    Lobby lobby = new Lobby();
+    Lobby lobby = new Lobby(this);
+
+    boolean running = true;
 
     public Story() {
         crater.setPadeji("кратер", "кратера", "кратеру", "кратер", "кратером", "кратере");
@@ -47,7 +51,7 @@ public class Story {
     }
 
     public void chapter1() {
-        while (true) {
+        while (running) {
             lobby.update();
             try {
                 Thread.sleep(1500);
@@ -55,5 +59,10 @@ public class Story {
                 e.printStackTrace();
             }
         }
+        System.out.println("Упс, похоже все спасатели улетели в космос, попробуйте написать другую историю");
+    }
+
+    public void setRunning(boolean st) {
+        this.running = st;
     }
 }

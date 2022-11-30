@@ -5,6 +5,8 @@ import Obj.Place.Place;
 
 public class Saver extends Person implements SaySomething, FeelGravity {
 
+    private boolean haveRope = true;
+
     private boolean inSpace = false;
 
     public Saver(String name) {
@@ -32,6 +34,10 @@ public class Saver extends Person implements SaySomething, FeelGravity {
         victim.setSaver(this);
     }
 
+    public void setHaveRope(boolean st) {
+        this.haveRope = st;
+    }
+
     public Victim getVictim() {
         return victim;
     }
@@ -39,6 +45,14 @@ public class Saver extends Person implements SaySomething, FeelGravity {
     public void delVictim() {
         this.victim.delSaver();
         this.victim = null;
+    }
+
+    public void setInSpace(boolean st) {
+        this.inSpace = st;
+    }
+
+    public boolean getHaveRope() {
+        return this.haveRope;
     }
 
     public void goTo(Place newLocation) {
@@ -51,6 +65,10 @@ public class Saver extends Person implements SaySomething, FeelGravity {
 
     public boolean try_to_jumpover() {
         if (this.getPlace().getGrav() == Grav.NO) {
+            if (this.haveRope) {
+                System.out.println("Если б не страховка, то летал бы " + this.name + " до конца своей жизни по космосу");
+                return true;
+            }
             this.inSpace = true;
             System.out.println("А всё, прыгать в условиях невесомости было плохой и спасатель улетел в космос");
             return false;
