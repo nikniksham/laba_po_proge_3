@@ -37,6 +37,13 @@ public class Story {
         victim2.setPlace(crater);
         victim3.setPlace(crater);
         saver.setPlace(farAway);
+
+        farAway.setNextPlace(field);
+        field.setPrevPlace(farAway);
+        field.setNextPlace(zabor);
+        zabor.setPrevPlace(field);
+        zabor.setNextPlace(crater);
+        crater.setPrevPlace(zabor);
     }
 
     public void chapter1() {

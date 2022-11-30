@@ -54,7 +54,7 @@ public class Lobby {
             }
             if (v.isRescue()) {
                 victims.remove(v);
-                break;  // Ещё не доказано
+                break;
             } else {
                 if (v.getSaver() == null) {
                     if (!v.isUjeZval()) {
@@ -69,7 +69,7 @@ public class Lobby {
                         }
                     }
                 } else {
-                    // терпим эвакуации
+                    // терпим, ждём эвакуацию
                 }
             }
         }
@@ -90,29 +90,15 @@ public class Lobby {
                         }
                     }
 
-                } else if (s.getPlace().equals(farAway)) {
-                    s.goTo(field);
-                } else if (s.getPlace().equals(field)) {
-                    s.goTo(zabor);
-                } else if (s.getPlace().equals(zabor)) {
-                    if (!zabor.isHaveHole()) {
-                        if (s.try_to_jumpover()) {
-                            System.out.println(s.getName() + " вырвал кусок забора");
-                            zabor.setHaveHole(true);
-                        } else {
-                            break;
-                        }
-                    } else {
-                        s.goTo(crater);
+                } else if (s.getPlace().getNextPlace() != null) {
+                    if (s.getPlace().action(s)) {
+                        break;
                     }
+                    s.goTo(s.getPlace().getNextPlace());
                 }
             } else {
-                if (s.getPlace().equals(crater)) {
-                    s.goTo(zabor);
-                } else if (s.getPlace().equals(zabor)) {
-                    s.goTo(field);
-                } else if (s.getPlace().equals(field)) {
-                    s.goTo(farAway);
+                if (s.getPlace().getPrevPlace() != null) {
+                    s.goTo(s.getPlace().getPrevPlace());
                 }
             }
         }

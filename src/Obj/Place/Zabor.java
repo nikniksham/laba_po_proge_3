@@ -1,6 +1,7 @@
 package Obj.Place;
 
 import Obj.Grav;
+import Obj.Person.Saver;
 
 public class Zabor extends Place {
 
@@ -16,5 +17,18 @@ public class Zabor extends Place {
 
     public boolean isHaveHole() {
         return haveHole;
+    }
+
+    @Override
+    public boolean action(Saver s) {
+        if (!this.isHaveHole()) {
+            if (s.try_to_jumpover()) {
+                System.out.println(s.getName() + " вырвал кусок забора");
+                this.setHaveHole(true);
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 }

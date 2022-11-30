@@ -2,6 +2,9 @@ package Obj.Place;
 
 import Obj.Grav;
 import Obj.MyObject;
+import Obj.Person.Saver;
+
+import java.util.concurrent.TransferQueue;
 
 
 public abstract class Place extends MyObject {
@@ -54,5 +57,9 @@ public abstract class Place extends MyObject {
 
     public void setPrevPlace(Place prevPlace) {
         this.prevPlace = prevPlace;
+    }
+
+    public boolean action(Saver s) {
+        return false;
     }
 }
