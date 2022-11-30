@@ -7,6 +7,8 @@ import Obj.MyObject;
 public abstract class Place extends MyObject {
     protected String im, ro, da, vi, tv, pr;
     private Grav grav;
+    private Place prevPlace;
+    private Place nextPlace;
 
     public Place(String name, Grav grav) {
         super(name);
@@ -36,5 +38,21 @@ public abstract class Place extends MyObject {
             case 6 -> this.pr;
             default -> "Нет такого падежа в русском языке";
         };
+    }
+
+    public Place getNextPlace() {
+        return nextPlace;
+    }
+
+    public void setNextPlace(Place nextPlace) {
+        this.nextPlace = nextPlace;
+    }
+
+    public Place getPrevPlace() {
+        return prevPlace;
+    }
+
+    public void setPrevPlace(Place prevPlace) {
+        this.prevPlace = prevPlace;
     }
 }
