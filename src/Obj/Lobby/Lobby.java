@@ -70,6 +70,9 @@ public class Lobby {
                 }
             }
         }
+        if (this.victims.size() == 0) {
+            this.story.setRunning(false);
+        }
     }
 
     private void checkSavers() {
