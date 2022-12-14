@@ -1,6 +1,6 @@
 package Obj.Story;
 
-import Obj.CustomException.NoOneVictims;
+import Obj.CustomException.NoOneVictimsException;
 import Obj.Grav;
 import Obj.Lobby.Lobby;
 import Obj.Person.Victim;
@@ -53,14 +53,15 @@ public class Story {
         farAway.setPadeji("даль", "дали", "дали", "даль", "далью", "дали");
 
         lobby.setLocations(farAway, field, zabor, crater);
-        lobby.setSaver(saver, saver2);
+//        lobby.setSaver(saver, saver2);
+        lobby.setSaver(saver);
         lobby.setVictims(victim, victim2, victim3);
 
         victim.setPlace(crater);
         victim2.setPlace(crater);
         victim3.setPlace(crater);
         saver.setPlace(farAway);
-        saver2.setPlace(farAway);
+//        saver2.setPlace(farAway);
 
         farAway.setNextPlace(field);
         field.setPrevPlace(farAway);
@@ -70,13 +71,19 @@ public class Story {
         crater.setPrevPlace(zabor);
     }
 
-    public void chapter1() throws NoOneVictims {
+    public void chapter1() {
         while (running) {
-            lobby.update();
             try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
+                lobby.update();
+                try {
+                    Thread.sleep(15);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+                running = false;
             }
         }
         System.out.println("История закончилась, попробуйте написать другую");

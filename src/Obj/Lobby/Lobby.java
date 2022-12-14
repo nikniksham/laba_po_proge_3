@@ -1,7 +1,7 @@
 package Obj.Lobby;
 
 import Obj.CustomException.NoOneSaversException;
-import Obj.CustomException.NoOneVictims;
+import Obj.CustomException.NoOneVictimsException;
 import Obj.Person.Saver;
 import Obj.Person.Victim;
 import Obj.Place.*;
@@ -49,7 +49,7 @@ public class Lobby {
 
     }
 
-    private void checkVictims() throws NoOneVictims {
+    private void checkVictims() throws NoOneVictimsException {
         for (Victim v : victims) {
             if (v.isRescue()) {
                 victims.remove(v);
@@ -75,9 +75,9 @@ public class Lobby {
         if (this.victims.size() == 0) {
             this.story.setRunning(false);
             if (this.savers.size() > 0) {
-                throw new NoOneVictims("Жертвы кончились, спасателям больше нечего делать");
+                throw new NoOneVictimsException("Жертвы кончились, спасателям больше нечего делать");
             } else {
-                throw new NoOneVictims("Все действующие лица улетели в космос и обречены умереть, что за кровожадность автора истории?!");
+                throw new NoOneVictimsException("Все действующие лица улетели в космос и обречены умереть, что за кровожадность автора истории?!");
             }
         }
     }
@@ -117,7 +117,7 @@ public class Lobby {
         }
     }
 
-    public void update() throws NoOneVictims {
+    public void update() throws NoOneVictimsException {
         this.checkVictims();
         this.checkSavers();
     }

@@ -17,7 +17,7 @@ public class FarAway extends Place {
                         " а сделав еще шаг, он неожиданно оторвался от земли и взвился вместе с " + s.getVictim().getName());
                 System.out.println(s.getName() + " растерялся в первый момент, но потом вспомнил, что привязан к веревке, и закричал");
                 if (s.getHaveRope()) {
-                    System.out.println(s.getName() + " коротышки вспомнили про свою обязанность и притянули его к дому");
+                    System.out.println("Коротышки вспомнили про свою обязанность и притянули " + s.getName() + " к дому");
                 } else {
                     s.setInSpace(true);
                     System.out.println("Увы, но верёвка порвалась");
@@ -26,14 +26,14 @@ public class FarAway extends Place {
                     return true;
                 }
             } else {
-                System.out.println(s.getName() + " не выпендривался и просто донёс " + s.getVictim().getName() + "до дома");
+                System.out.println(s.getName() + " не выпендривался и просто донёс " + s.getVictim().getName() + " до дома");
             }
             Victim v = s.getVictim();
             System.out.println(s.getName() + " спас " + v.getName());
             v.setRescue(true);
             s.setAimToVictim(false);
             v.getSaver().delVictim();
-            if (Math.random() > 0.2) {
+            if (Math.random() > 0.3) {
                 System.out.println("Эвакуация прошла успешна");
             } else {
                 System.out.println("Человека конечно эвакуировали, но верёвка порвалась");
