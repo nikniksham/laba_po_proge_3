@@ -8,10 +8,12 @@ import Obj.Place.Crater;
 import Obj.Place.FarAway;
 import Obj.Place.Field;
 import Obj.Place.Zabor;
+import Obj.SayHelloToUser;
 
 public class Story {
     // Герои
     Saver saver = new Saver("Знайка");
+    Saver saver2 = new Saver("Незнайка");
     Victim victim = new Victim("Винтик");
     Victim victim2 = new Victim("Шпунтик");
     Victim victim3 = new Victim("Гунтик");
@@ -28,19 +30,36 @@ public class Story {
     boolean running = true;
 
     public Story() {
+        // Анонимный мистер вежливый бот
+        SayHelloToUser mrPoliteBot = new SayHelloToUser() {
+            @Override
+            public void sayHello() {
+                System.out.println("Привет наш дорогой и многоуважаемый пользователь");
+            }
+        };
+
+        mrPoliteBot.sayHello();
+        SayHelloAgain.say();
+        SayHelloAgainAgain aaa = new SayHelloAgainAgain();
+        aaa.say();
+        PoliteAndFriendly.say();
+        PoliteAndFriendly bbb = new PoliteAndFriendly();
+        bbb.notFriendly();
+
         crater.setPadeji("кратер", "кратера", "кратеру", "кратер", "кратером", "кратере");
         zabor.setPadeji("забор", "забора", "забору", "забор", "забором", "заборе");
         field.setPadeji("поле", "поля", "полю", "поле", "полем", "поле");
         farAway.setPadeji("даль", "дали", "дали", "даль", "далью", "дали");
 
         lobby.setLocations(farAway, field, zabor, crater);
-        lobby.setSaver(saver);
+        lobby.setSaver(saver, saver2);
         lobby.setVictims(victim, victim2, victim3);
 
         victim.setPlace(crater);
         victim2.setPlace(crater);
         victim3.setPlace(crater);
         saver.setPlace(farAway);
+        saver2.setPlace(farAway);
 
         farAway.setNextPlace(field);
         field.setPrevPlace(farAway);
@@ -59,10 +78,33 @@ public class Story {
                 e.printStackTrace();
             }
         }
-        System.out.println("Упс, похоже все спасатели улетели в космос, попробуйте написать другую историю");
+        System.out.println("История закончилась, попробуйте написать другую");
     }
 
     public void setRunning(boolean st) {
         this.running = st;
+    }
+
+    public static class SayHelloAgain {
+        public static void say() {
+            System.out.println("ПРИВЕТ ПРИВЕТ!");
+        }
+    }
+
+    public class SayHelloAgainAgain {
+        public void say() {
+            System.out.println("ЗДРАВСТВУЙТЕ, HALLO, HELLO, HI, ПРИВЕТ, КУ, АЛОХА, GOOD MORNING");
+        }
+    }
+}
+
+
+class PoliteAndFriendly {
+    public static void say() {
+        System.out.println("Im very very polite and friendly, and say hello");
+    }
+
+    public void notFriendly() {
+        System.out.println("Im very very not polite and not friendly, and not say hello");
     }
 }

@@ -1,5 +1,6 @@
 package Obj.Lobby;
 
+import Obj.CustomException.NoOneSaversException;
 import Obj.Person.Saver;
 import Obj.Person.Victim;
 import Obj.Place.*;
@@ -106,7 +107,7 @@ public class Lobby {
             }
         }
         if (this.savers.size() == 0) {
-            this.story.setRunning(false);
+            throw new NoOneSaversException("Как жаль, но все спасатели улетели в космос. Жертвы обречены...");
         }
     }
 
