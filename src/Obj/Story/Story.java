@@ -1,5 +1,6 @@
 package Obj.Story;
 
+import Obj.CustomException.NoOneVictims;
 import Obj.Grav;
 import Obj.Lobby.Lobby;
 import Obj.Person.Victim;
@@ -43,8 +44,8 @@ public class Story {
         SayHelloAgainAgain aaa = new SayHelloAgainAgain();
         aaa.say();
         PoliteAndFriendly.say();
-        PoliteAndFriendly bbb = new PoliteAndFriendly();
-        bbb.notFriendly();
+        PoliteAndFriendly politebot = new PoliteAndFriendly();
+        politebot.notFriendly();
 
         crater.setPadeji("кратер", "кратера", "кратеру", "кратер", "кратером", "кратере");
         zabor.setPadeji("забор", "забора", "забору", "забор", "забором", "заборе");
@@ -69,7 +70,7 @@ public class Story {
         crater.setPrevPlace(zabor);
     }
 
-    public void chapter1() {
+    public void chapter1() throws NoOneVictims {
         while (running) {
             lobby.update();
             try {
